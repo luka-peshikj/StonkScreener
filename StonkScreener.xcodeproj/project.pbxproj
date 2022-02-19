@@ -8,22 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		A1EA32F427C1092D003D72D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA32F327C1092D003D72D3 /* AppDelegate.swift */; };
-		A1EA32F627C1092D003D72D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA32F527C1092D003D72D3 /* SceneDelegate.swift */; };
 		A1EA32F827C1092D003D72D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA32F727C1092D003D72D3 /* ViewController.swift */; };
-		A1EA32FB27C1092D003D72D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1EA32F927C1092D003D72D3 /* Main.storyboard */; };
 		A1EA32FD27C1092E003D72D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1EA32FC27C1092E003D72D3 /* Assets.xcassets */; };
 		A1EA330027C1092E003D72D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1EA32FE27C1092E003D72D3 /* LaunchScreen.storyboard */; };
+		A1EA330D27C10F87003D72D3 /* Stonk.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA330C27C10F87003D72D3 /* Stonk.swift */; };
+		A1EA330F27C10FCA003D72D3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA330E27C10FCA003D72D3 /* NetworkManager.swift */; };
+		A1EA331127C11065003D72D3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA331027C11065003D72D3 /* Extensions.swift */; };
+		A1EA331327C111A5003D72D3 /* StockNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA331227C111A5003D72D3 /* StockNews.swift */; };
+		A1EA331527C11332003D72D3 /* StockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA331427C11332003D72D3 /* StockTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A1EA32F027C1092D003D72D3 /* StonkScreener.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StonkScreener.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1EA32F327C1092D003D72D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A1EA32F527C1092D003D72D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A1EA32F727C1092D003D72D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A1EA32FA27C1092D003D72D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A1EA32FC27C1092E003D72D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1EA32FF27C1092E003D72D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A1EA330127C1092E003D72D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1EA330C27C10F87003D72D3 /* Stonk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stonk.swift; sourceTree = "<group>"; };
+		A1EA330E27C10FCA003D72D3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		A1EA331027C11065003D72D3 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		A1EA331227C111A5003D72D3 /* StockNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockNews.swift; sourceTree = "<group>"; };
+		A1EA331427C11332003D72D3 /* StockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,14 +63,65 @@
 			isa = PBXGroup;
 			children = (
 				A1EA32F327C1092D003D72D3 /* AppDelegate.swift */,
-				A1EA32F527C1092D003D72D3 /* SceneDelegate.swift */,
-				A1EA32F727C1092D003D72D3 /* ViewController.swift */,
-				A1EA32F927C1092D003D72D3 /* Main.storyboard */,
-				A1EA32FC27C1092E003D72D3 /* Assets.xcassets */,
-				A1EA32FE27C1092E003D72D3 /* LaunchScreen.storyboard */,
+				A1EA330727C10C42003D72D3 /* ViewControllers */,
+				A1EA331627C114A3003D72D3 /* ViewModels */,
+				A1EA330827C10C4C003D72D3 /* Models */,
+				A1EA330927C10C50003D72D3 /* Views */,
+				A1EA330A27C10C5A003D72D3 /* Networking */,
+				A1EA330B27C10C5F003D72D3 /* Utils */,
 				A1EA330127C1092E003D72D3 /* Info.plist */,
+				A1EA32FE27C1092E003D72D3 /* LaunchScreen.storyboard */,
+				A1EA32FC27C1092E003D72D3 /* Assets.xcassets */,
 			);
 			path = StonkScreener;
+			sourceTree = "<group>";
+		};
+		A1EA330727C10C42003D72D3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A1EA32F727C1092D003D72D3 /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A1EA330827C10C4C003D72D3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A1EA330C27C10F87003D72D3 /* Stonk.swift */,
+				A1EA331227C111A5003D72D3 /* StockNews.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A1EA330927C10C50003D72D3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A1EA331427C11332003D72D3 /* StockTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A1EA330A27C10C5A003D72D3 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				A1EA330E27C10FCA003D72D3 /* NetworkManager.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		A1EA330B27C10C5F003D72D3 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A1EA331027C11065003D72D3 /* Extensions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		A1EA331627C114A3003D72D3 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +184,6 @@
 			files = (
 				A1EA330027C1092E003D72D3 /* LaunchScreen.storyboard in Resources */,
 				A1EA32FD27C1092E003D72D3 /* Assets.xcassets in Resources */,
-				A1EA32FB27C1092D003D72D3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +194,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1EA331527C11332003D72D3 /* StockTableViewCell.swift in Sources */,
+				A1EA331127C11065003D72D3 /* Extensions.swift in Sources */,
+				A1EA331327C111A5003D72D3 /* StockNews.swift in Sources */,
+				A1EA330F27C10FCA003D72D3 /* NetworkManager.swift in Sources */,
+				A1EA330D27C10F87003D72D3 /* Stonk.swift in Sources */,
 				A1EA32F827C1092D003D72D3 /* ViewController.swift in Sources */,
 				A1EA32F427C1092D003D72D3 /* AppDelegate.swift in Sources */,
-				A1EA32F627C1092D003D72D3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		A1EA32F927C1092D003D72D3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A1EA32FA27C1092D003D72D3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A1EA32FE27C1092E003D72D3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -289,23 +341,24 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L22G3JYQ6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StonkScreener/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = wavecrest.StonkScreener;
+				PRODUCT_BUNDLE_IDENTIFIER = luka.StonkScreener;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -316,23 +369,24 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L22G3JYQ6B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StonkScreener/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = wavecrest.StonkScreener;
+				PRODUCT_BUNDLE_IDENTIFIER = luka.StonkScreener;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

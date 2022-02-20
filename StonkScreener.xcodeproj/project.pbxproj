@@ -11,11 +11,15 @@
 		A1EA32F827C1092D003D72D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA32F727C1092D003D72D3 /* ViewController.swift */; };
 		A1EA32FD27C1092E003D72D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1EA32FC27C1092E003D72D3 /* Assets.xcassets */; };
 		A1EA330027C1092E003D72D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1EA32FE27C1092E003D72D3 /* LaunchScreen.storyboard */; };
-		A1EA330D27C10F87003D72D3 /* Stonk.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA330C27C10F87003D72D3 /* Stonk.swift */; };
+		A1EA330D27C10F87003D72D3 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA330C27C10F87003D72D3 /* Stock.swift */; };
 		A1EA330F27C10FCA003D72D3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA330E27C10FCA003D72D3 /* NetworkManager.swift */; };
 		A1EA331127C11065003D72D3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA331027C11065003D72D3 /* Extensions.swift */; };
 		A1EA331327C111A5003D72D3 /* StockNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA331227C111A5003D72D3 /* StockNews.swift */; };
 		A1EA331527C11332003D72D3 /* StockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA331427C11332003D72D3 /* StockTableViewCell.swift */; };
+		A1EA331827C11898003D72D3 /* StocksDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA331727C11898003D72D3 /* StocksDataSource.swift */; };
+		A1EA331A27C1206A003D72D3 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA331927C1206A003D72D3 /* NewsTableViewCell.swift */; };
+		A1EA331E27C13656003D72D3 /* StockDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA331D27C13656003D72D3 /* StockDetailsViewController.swift */; };
+		A1EA332127C139D4003D72D3 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA332027C139D4003D72D3 /* LocalStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,11 +29,15 @@
 		A1EA32FC27C1092E003D72D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1EA32FF27C1092E003D72D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A1EA330127C1092E003D72D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A1EA330C27C10F87003D72D3 /* Stonk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stonk.swift; sourceTree = "<group>"; };
+		A1EA330C27C10F87003D72D3 /* Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
 		A1EA330E27C10FCA003D72D3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A1EA331027C11065003D72D3 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A1EA331227C111A5003D72D3 /* StockNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockNews.swift; sourceTree = "<group>"; };
 		A1EA331427C11332003D72D3 /* StockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockTableViewCell.swift; sourceTree = "<group>"; };
+		A1EA331727C11898003D72D3 /* StocksDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksDataSource.swift; sourceTree = "<group>"; };
+		A1EA331927C1206A003D72D3 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		A1EA331D27C13656003D72D3 /* StockDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDetailsViewController.swift; sourceTree = "<group>"; };
+		A1EA332027C139D4003D72D3 /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				A1EA32F727C1092D003D72D3 /* ViewController.swift */,
+				A1EA331D27C13656003D72D3 /* StockDetailsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -87,7 +96,7 @@
 		A1EA330827C10C4C003D72D3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A1EA330C27C10F87003D72D3 /* Stonk.swift */,
+				A1EA330C27C10F87003D72D3 /* Stock.swift */,
 				A1EA331227C111A5003D72D3 /* StockNews.swift */,
 			);
 			path = Models;
@@ -97,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				A1EA331427C11332003D72D3 /* StockTableViewCell.swift */,
+				A1EA331927C1206A003D72D3 /* NewsTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -113,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				A1EA331027C11065003D72D3 /* Extensions.swift */,
+				A1EA332027C139D4003D72D3 /* LocalStorage.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -120,6 +131,7 @@
 		A1EA331627C114A3003D72D3 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				A1EA331727C11898003D72D3 /* StocksDataSource.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -194,13 +206,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1EA332127C139D4003D72D3 /* LocalStorage.swift in Sources */,
 				A1EA331527C11332003D72D3 /* StockTableViewCell.swift in Sources */,
 				A1EA331127C11065003D72D3 /* Extensions.swift in Sources */,
 				A1EA331327C111A5003D72D3 /* StockNews.swift in Sources */,
+				A1EA331827C11898003D72D3 /* StocksDataSource.swift in Sources */,
 				A1EA330F27C10FCA003D72D3 /* NetworkManager.swift in Sources */,
-				A1EA330D27C10F87003D72D3 /* Stonk.swift in Sources */,
+				A1EA330D27C10F87003D72D3 /* Stock.swift in Sources */,
 				A1EA32F827C1092D003D72D3 /* ViewController.swift in Sources */,
 				A1EA32F427C1092D003D72D3 /* AppDelegate.swift in Sources */,
+				A1EA331E27C13656003D72D3 /* StockDetailsViewController.swift in Sources */,
+				A1EA331A27C1206A003D72D3 /* NewsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

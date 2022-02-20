@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - WelcomeElement
 struct StockNews: Codable {
     let symbol, publishedDate, title: String
     let image: String

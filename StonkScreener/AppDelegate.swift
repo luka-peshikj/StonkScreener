@@ -22,8 +22,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [stocksViewController, favoriteViewController]
+        tabBarController.view.backgroundColor = .white
         
-        window?.rootViewController = tabBarController
+        let navigationController = UINavigationController(rootViewController: tabBarController)
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .darkGray
+        appearance.titleTextAttributes = [.font:UIFont.boldSystemFont(ofSize: 24.0), .foregroundColor: UIColor.white]
+
+        navigationController.navigationBar.standardAppearance = appearance
+        navigationController.navigationBar.scrollEdgeAppearance = appearance
+        
+        tabBarController.title = "Stonks"
+        
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
         return true

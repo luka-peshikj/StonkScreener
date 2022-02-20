@@ -18,8 +18,8 @@ enum RequestLoadingError: Error {
 }
 
 class NetworkManager {
-    typealias StonksHandler = (RequestResult<Stonk, RequestLoadingError>) -> Void
-    typealias SearchResultsHandler = (RequestResult<Stonk, RequestLoadingError>) -> Void
+    typealias StonksHandler = (RequestResult<StockArray, RequestLoadingError>) -> Void
+    typealias SearchResultsHandler = (RequestResult<StockArray, RequestLoadingError>) -> Void
 
     let urlString = "https://financialmodelingprep.com/api/v3/stock-screener?marketCapMoreThan=1000000000&volumeMoreThan=10000&sector=Technology&exchange=NASDAQ&limit=100&apikey=d64d179adb2bcbf73edd76abd7e9e477"
     
@@ -28,8 +28,8 @@ class NetworkManager {
             let task = URLSession.shared.dataTask(with: endpointUrl) { result in
                 switch result {
                 case .success(let data):
-                    if let pageResults = try? JSONDecoder().decode(Stonk.self, from: data) {
-                        completionHandler(.success(pageResults))
+                    if let stocksResponse = try? JSONDecoder().decode(StockArray.self, from: data) {
+                        completionHandler(.success(stocksResponse))
                     } else {
                         completionHandler(.failure(.invalidData))
                     }

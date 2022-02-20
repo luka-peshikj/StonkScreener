@@ -7,8 +7,7 @@
 
 import Foundation
 
-// MARK: - WelcomeElement
-struct Stonk: Codable {
+struct Stock: Codable, Hashable {
     let symbol, companyName: String
     let marketCap: Int
     let sector: Sector
@@ -36,4 +35,4 @@ enum Sector: String, Codable {
     case technology = "Technology"
 }
 
-typealias StonkArray = [Stonk]
+typealias StockArray = [Stock]

@@ -9,7 +9,7 @@ import Foundation
 
 struct StockNews: Codable {
     let symbol, publishedDate, title: String
-    let image: String
+    let image: String?
     let site, text: String
     let url: String
 }

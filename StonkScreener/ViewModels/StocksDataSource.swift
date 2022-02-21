@@ -41,11 +41,11 @@ class StocksDataSource {
         }
     }
     
-    func filterStocksWithPredicate() -> StockArray {
+    func filterStocksWithPredicate(stocks: StockArray) -> StockArray {
         if filterPredicate.isEmpty {
-            return fetchedStocks
+            return stocks
         } else {
-            return fetchedStocks.filter { $0.symbol.localizedCaseInsensitiveContains(filterPredicate) || $0.companyName.localizedCaseInsensitiveContains(filterPredicate) }
+            return stocks.filter { $0.symbol.localizedCaseInsensitiveContains(filterPredicate) || $0.companyName.localizedCaseInsensitiveContains(filterPredicate) }
         }
     }
     
@@ -76,21 +76,27 @@ class StocksDataSource {
         }
     }
     
-    func getStocksForCurrentSettings() -> StockArray {
-        return sortStocks(stocks: filterStocksWithPredicate())
+    func getStocksForCurrentSettings(stocks: StockArray) -> StockArray {
+        return sortStocks(stocks: filterStocksWithPredicate(stocks: stocks))
     }
     
     func getStocksArray() -> StockArray {
         if tabBarIndex == 0 {
-            return getStocksForCurrentSettings()
+            return getStocksForCurrentSettings(stocks: fetchedStocks)
         } else if tabBarIndex == 1 {
-            return getLocallySavedStock()
+            return getStocksForCurrentSettings(stocks: getLocallySavedStock())
         } else {
             return []
         }
     }
     
-    func addToFavorites(stock: Stock) {
-        
+    func addToFavorites(stock: Stock) -> Bool {
+        if (getLocallySavedStock().contains(where: { $0.symbol == stock.symbol })) {
+            deleteLocalStock(stock: stock)
+            return false
+        } else {
+            saveLocalStock(stock: stock)
+            return true
+        }
     }
 }

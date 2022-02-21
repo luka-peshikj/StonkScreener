@@ -7,10 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class StocksViewController: UIViewController {
     
     private var tableView: UITableView!
-    private let cellReuseIdentifier: String = "cellReuseIdentifier"
+    private let stockCellReuseIdentifier: String = "stockCellReuseIdentifier"
     private var requestInProgress = false
     private let dataModel = StocksDataSource()
     private var searchBar = UISearchBar()
@@ -24,7 +24,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         setupViews()
         setupButtons()
         setupTableView()
@@ -40,9 +39,11 @@ class ViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         searchBar.sizeToFit()
+        searchBar.frame = CGRect(x: 0, y: 0, width: view.safeAreaLayoutGuide.layoutFrame.width, height: 56)
     }
     
     private func setupViews() {
+        view.backgroundColor = .darkGray
         containerView = UIView()
         containerView.backgroundColor = .darkGray
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -54,6 +55,7 @@ class ViewController: UIViewController {
             containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             containerView.heightAnchor.constraint(equalToConstant: 100)
         ])
+        
         searchBar.showsCancelButton = true
         searchBar.enablesReturnKeyAutomatically = false
         searchBar.delegate = self
@@ -95,13 +97,14 @@ class ViewController: UIViewController {
         
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         tableView = UITableView(frame: .zero)
-        tableView.register(StockTableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        tableView.register(StockTableViewCell.self, forCellReuseIdentifier: stockCellReuseIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.alwaysBounceVertical = false
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.backgroundColor = .darkGray
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
@@ -178,13 +181,13 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDataSource {
+extension StocksViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataModel.getStocksArray().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath as IndexPath) as! StockTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: stockCellReuseIdentifier, for: indexPath as IndexPath) as! StockTableViewCell
         let stockAtIndexPath = dataModel.getStocksArray()[indexPath.row]
         cell.configure(withStock:stockAtIndexPath)
         cell.delegate = self
@@ -195,7 +198,7 @@ extension ViewController: UITableViewDataSource {
     }
 }
 
-extension ViewController: UITableViewDelegate {
+extension StocksViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let stockDetailsViewController = StockDetailsViewController(withStock: dataModel.getStocksArray()[indexPath.row])
@@ -211,17 +214,12 @@ extension ViewController: UITableViewDelegate {
     }
 }
 
-extension ViewController: FavoritesButtonDelegate {
+extension StocksViewController: FavoritesButtonDelegate {
     func addToFavorites(cell: StockTableViewCell) {
         if let indexPath = tableView.indexPath(for: cell) {
             let stockAtIndexPath = dataModel.getStocksArray()[indexPath.row]
-            if (dataModel.getLocallySavedStock().contains(where: { $0.symbol == stockAtIndexPath.symbol })) {
-                dataModel.deleteLocalStock(stock: stockAtIndexPath)
-                cell.favoriteImageClicked(isFavorite: false)
-            } else {
-                dataModel.saveLocalStock(stock: stockAtIndexPath)
-                cell.favoriteImageClicked(isFavorite: true)
-            }
+            let shouldHighlightFavoriteButton = dataModel.addToFavorites(stock: stockAtIndexPath)
+            cell.favoriteImageClicked(isFavorite: shouldHighlightFavoriteButton)
             if (tabBarIndex == 1) {
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
@@ -229,7 +227,7 @@ extension ViewController: FavoritesButtonDelegate {
     }
 }
 
-extension ViewController: UISearchBarDelegate {
+extension StocksViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }

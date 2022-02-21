@@ -48,7 +48,7 @@ class StockTableViewCell: UITableViewCell {
     private let favoritesButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setImage(UIImage(systemName: "star")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal), for: .normal)
+        btn.setImage(UIImage(systemName: "heart")!.withTintColor(.systemPink, renderingMode: .alwaysOriginal), for: .normal)
         return btn
     }()
 
@@ -113,7 +113,7 @@ class StockTableViewCell: UITableViewCell {
         stockSymbolLabel.text = ""
         stockCompanyNameLabel.text = ""
         stockPriceLabel.text = ""
-        self.favoritesButton.setImage(UIImage(systemName: "star")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal), for: .normal)
+        self.favoritesButton.setImage(UIImage(systemName: "heart")!.withTintColor(.systemPink, renderingMode: .alwaysOriginal), for: .normal)
     }
 
     func favoriteImageClicked(isFavorite: Bool) {
@@ -122,18 +122,18 @@ class StockTableViewCell: UITableViewCell {
         UIView.animate(withDuration: 0.3) {
             self.favoritesButton.alpha = 1.0
             if isFavorite {
-                self.favoritesButton.setImage(UIImage(systemName: "star.fill")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal), for: .normal)
+                self.favoritesButton.setImage(UIImage(systemName: "heart.fill")!.withTintColor(.systemPink, renderingMode: .alwaysOriginal), for: .normal)
             } else {
-                self.favoritesButton.setImage(UIImage(systemName: "star")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal), for: .normal)
+                self.favoritesButton.setImage(UIImage(systemName: "heart")!.withTintColor(.systemPink, renderingMode: .alwaysOriginal), for: .normal)
             }
         }
     }
     
     func setFavoriteImage(isActive: Bool) {
         if isActive {
-            self.favoritesButton.setImage(UIImage(systemName: "star.fill")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal), for: .normal)
+            self.favoritesButton.setImage(UIImage(systemName: "heart.fill")!.withTintColor(.systemPink, renderingMode: .alwaysOriginal), for: .normal)
         } else {
-            self.favoritesButton.setImage(UIImage(systemName: "star")!.withTintColor(.systemYellow, renderingMode: .alwaysOriginal), for: .normal)
+            self.favoritesButton.setImage(UIImage(systemName: "heart")!.withTintColor(.systemPink, renderingMode: .alwaysOriginal), for: .normal)
         }
     }
 }

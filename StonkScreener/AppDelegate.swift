@@ -14,10 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let stocksViewController = ViewController()
+        let stocksViewController = StocksViewController()
         stocksViewController.title = "Stocks"
 
-        let favoriteViewController = ViewController()
+        let favoriteViewController = StocksViewController()
         favoriteViewController.title = "My Stocks"
 
         let tabBarController = UITabBarController()
@@ -34,7 +34,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationController.navigationBar.standardAppearance = appearance
         navigationController.navigationBar.scrollEdgeAppearance = appearance
         
+        let tabBarAppearance = UITabBarItem.appearance()
+        let attributes = [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 20.0)]
+        tabBarAppearance.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: .normal)
+        
         tabBarController.title = "Stonks"
+        tabBarController.tabBar.tintColor = .white
         
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()

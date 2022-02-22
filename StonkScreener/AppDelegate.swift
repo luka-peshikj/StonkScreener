@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         stocksViewController.title = "Stocks"
 
         let favoriteViewController = StocksViewController()
-        favoriteViewController.title = "My Stocks"
+        favoriteViewController.title = "My stocks"
 
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [stocksViewController, favoriteViewController]
@@ -38,14 +38,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let attributes = [NSAttributedString.Key.font:UIFont.boldSystemFont(ofSize: 20.0)]
         tabBarAppearance.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: .normal)
         
-        tabBarController.title = "Stonks"
+        tabBarController.title = "Stocks"
         tabBarController.tabBar.tintColor = .white
         
-        let myTabBarItem2 = (tabBarController.tabBar.items?[1])! as UITabBarItem
-        myTabBarItem2.image = UIImage(systemName: "heart")?.withRenderingMode(.alwaysOriginal)
-        myTabBarItem2.selectedImage = UIImage(systemName: "heart.fill")?.withRenderingMode(.alwaysOriginal)
-        myTabBarItem2.title = "My stocks"
-        myTabBarItem2.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        let myTabBarItem = (tabBarController.tabBar.items?[1])! as UITabBarItem
+        myTabBarItem.image = UIImage(systemName: "heart")?.withRenderingMode(.alwaysOriginal)
+        myTabBarItem.selectedImage = UIImage(systemName: "heart.fill")?.withRenderingMode(.alwaysOriginal)
+        myTabBarItem.title = "My stocks"
+        myTabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()

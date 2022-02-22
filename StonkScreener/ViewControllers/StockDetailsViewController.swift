@@ -9,16 +9,18 @@ import UIKit
 
 class StockDetailsViewController: UIViewController {
 
-    var currentStock: Stock
-    var newsTableView: UITableView!
-    private let newsCellReuseIdentifier: String = "newsCellReuseIdentifier"
+    private var newsTableView: UITableView!
+    private var currentStock: Stock
     private let newsDataModel = NewsDataSource()
+    private let newsCellReuseIdentifier: String = "newsCellReuseIdentifier"
     private var requestInProgress = false
     private var currentPage = 0
     
     /// Bonus feature!
     /// With the default implementation, we fetch 1000 news object from a single request. That seems like a lot. Here I've implemented a "paginated" way of displaying news objects. There are 100 news objects per page, so naturally we fetch and present them much quicker. Enable this boolean to check this feature out.
     private var weWantInfiniteScrolling = false
+
+    // MARK: - Lifecycle methods
 
     init(withStock stock: Stock) {
         currentStock = stock
@@ -42,6 +44,8 @@ class StockDetailsViewController: UIViewController {
         }
     }
     
+    // MARK: - Helper methods
+
     private func setupViews() {
         view.backgroundColor = .darkGray
         title = "News"
@@ -76,7 +80,7 @@ class StockDetailsViewController: UIViewController {
                         self?.newsTableView.reloadData()
                     }
                 } else {
-                    //Here we can handle the error response from the server with the "dataModel.stocksLoadingError" property. Depending on what type of error it is, whether or not the dataModel is completely empty or not, we can decide what to show and how to proceed.
+                    //Here we can handle the error response from the server with the "newsDataModel.newsLoadingError" property. Depending on what type of error it is, whether or not the dataModel is completely empty or not, we can decide what to show and how to proceed.
                 }
             })
         }
@@ -92,12 +96,14 @@ class StockDetailsViewController: UIViewController {
                         self?.newsTableView.reloadData()
                     }
                 } else {
-                    //Here we can handle the error response from the server with the "dataModel.stocksLoadingError" property. Depending on what type of error it is, whether or not the dataModel is completely empty or not, we can decide what to show and how to proceed.
+                    //Here we can handle the error response from the server with the "newsDataModel.newsLoadingError" property. Depending on what type of error it is, whether or not the dataModel is completely empty or not, we can decide what to show and how to proceed.
                 }
             })
         }
     }
 }
+
+// MARK: - Delegate methods
 
 extension StockDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -108,7 +114,7 @@ extension StockDetailsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: newsCellReuseIdentifier, for: indexPath as IndexPath) as! NewsTableViewCell
         let newsAtIndexPath = newsDataModel.getNewsArray()[indexPath.row]
         
-        //This is a simple way of implementing infinite scrolling. Of course, this is dependent on how many new items we get from each request, network speed, the cell height, how many cell are we showing on screen at any time etc.
+        //This is a simple way of implementing infinite scrolling. Of course, this is dependent on how many new items we get in each response, network speed, scrolling speed, the cell height, how many cell are we showing on screen at any time etc.
         if weWantInfiniteScrolling {
             if indexPath.item + 20 > newsDataModel.getNewsArray().count {
                 currentPage += 1

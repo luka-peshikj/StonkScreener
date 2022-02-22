@@ -14,6 +14,7 @@ enum SortBy: Int {
 }
 
 class StocksDataSource {
+    
     private let networkManager = NetworkManager()
     private var fetchedStocks = StockArray()
     private var stocksLoadingError = String()
@@ -42,7 +43,7 @@ class StocksDataSource {
         }
     }
     
-    func filterStocksWithPredicate(stocks: StockArray) -> StockArray {
+    private func filterStocksWithPredicate(stocks: StockArray) -> StockArray {
         if filterPredicate.isEmpty {
             return stocks
         } else {
@@ -66,7 +67,7 @@ class StocksDataSource {
         return fetchedStocks
     }
     
-    func sortStocks(stocks: StockArray) -> StockArray {
+    private func sortStocks(stocks: StockArray) -> StockArray {
         switch sortByOption {
         case SortBy.none:
             return stocks
@@ -77,7 +78,7 @@ class StocksDataSource {
         }
     }
     
-    func getStocksForCurrentSettings(stocks: StockArray) -> StockArray {
+    private func getStocksForCurrentSettings(stocks: StockArray) -> StockArray {
         return filterStocksArrayWithCountries(forArray:sortStocks(stocks: filterStocksWithPredicate(stocks: stocks)))
     }
     
@@ -101,11 +102,7 @@ class StocksDataSource {
         }
     }
     
-    func countriesToFilterWith(countryArray: Array<String>) {
-        countriesFilterArray = countryArray
-    }
-    
-    func filterStocksArrayWithCountries(forArray array: StockArray) -> StockArray {
+    private func filterStocksArrayWithCountries(forArray array: StockArray) -> StockArray {
         if countriesFilterArray.isEmpty {
             return array
         } else {

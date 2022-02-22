@@ -8,6 +8,7 @@
 import Foundation
 
 class NewsDataSource {
+    
     private let networkManager = NetworkManager()
     private var fetchedNews = StockNewsArray()
     private var newsLoadingError = String()

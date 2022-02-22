@@ -11,25 +11,27 @@ class StocksViewController: UIViewController {
     
     private var stocksTableView: UITableView!
     private var countryFilterTableView: UITableView!
-    private let stockCellReuseIdentifier: String = "stockCellReuseIdentifier"
-    private var requestInProgress = false
-    private let stocksDataModel = StocksDataSource()
-    private var countriesDataModel = CountryFilterDataSource()
-    private var searchBar = UISearchBar()
     private var containerView: UIView!
     private var sortByAlphabeticalButton: UIButton!
     private var sortByMarketCapButton: UIButton!
     private var filterByCountryButton: UIButton!
+    private var searchBar = UISearchBar()
+    private let stocksDataModel = StocksDataSource()
+    private var countriesDataModel = CountryFilterDataSource()
+    private let stockCellReuseIdentifier: String = "stockCellReuseIdentifier"
+    private var requestInProgress = false
     private var alphabeticalSortingActive = false
     private var marketCapSortingActive = false
     private var tabBarIndex = 0
     private var currentSelectedSortingOption = SortBy.none
     
+    // MARK: - Lifecycle methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupButtons()
-        setupTableView()
+        setupTableViews()
         configureDataModel()
     }
 
@@ -45,6 +47,8 @@ class StocksViewController: UIViewController {
         searchBar.frame = CGRect(x: 0, y: 0, width: view.safeAreaLayoutGuide.layoutFrame.width, height: 56)
     }
     
+    // MARK: - Helper methods
+
     private func setupViews() {
         view.backgroundColor = .darkGray
         containerView = UIView()
@@ -115,7 +119,7 @@ class StocksViewController: UIViewController {
         
     }
     
-    private func setupTableView() {
+    private func setupTableViews() {
         stocksTableView = UITableView(frame: .zero)
         stocksTableView.register(StockTableViewCell.self, forCellReuseIdentifier: stockCellReuseIdentifier)
         stocksTableView.dataSource = self
@@ -165,12 +169,14 @@ class StocksViewController: UIViewController {
                         self?.countryFilterTableView.reloadData()
                     }
                 } else {
-                    //Here we can handle the error response from the server with the "dataModel.stocksLoadingError" property. Depending on what type of error it is, whether or not the dataModel is completely empty or not, we can decide what to show and how to proceed.
+                    //Here we can handle the error response from the server with the "stocksDataModel.stocksLoadingError" property. Depending on what type of error it is, whether or not the dataModel is completely empty or not, we can decide what to show and how to proceed.
                 }
             })
         }
     }
     
+    // MARK: - Button Actions
+
     @objc func buttonTapped(_ sender: UIButton){
         switch sender.tag {
         case 0:
@@ -190,7 +196,11 @@ class StocksViewController: UIViewController {
         case 2:
             countryFilterTableView.isHidden = !countryFilterTableView.isHidden
             if countryFilterTableView.isHidden {
-                filterByCountryButton.backgroundColor = .darkGray
+                if !countriesDataModel.getActiveCountrySet().isEmpty {
+                    filterByCountryButton.backgroundColor = .gray
+                } else {
+                    filterByCountryButton.backgroundColor = .darkGray
+                }
             } else {
                 filterByCountryButton.backgroundColor = .gray
             }
@@ -228,6 +238,8 @@ class StocksViewController: UIViewController {
     }
 }
 
+// MARK: - Delegate methods
+
 extension StocksViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == stocksTableView {
@@ -260,6 +272,7 @@ extension StocksViewController: UITableViewDataSource {
             }
             return cell
         } else {
+            //We can also create a custom CountryFilterTableViewCell, present the full name of the country, add a checkmark next to it etc...
             let cell = UITableViewCell()
             let countryFilter = countriesDataModel.getCountryArray()[indexPath.row]
             if countriesDataModel.getActiveCountrySet().contains(countryFilter) {

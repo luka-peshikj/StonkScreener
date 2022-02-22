@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Stock: Codable, Hashable {
+struct Stock: Codable {
     let symbol, companyName: String
     let marketCap: Int
     let sector: Sector

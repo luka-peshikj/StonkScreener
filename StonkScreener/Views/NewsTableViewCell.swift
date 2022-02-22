@@ -9,6 +9,7 @@ import UIKit
 import SDWebImage
 
 class NewsTableViewCell: UITableViewCell {
+    
     private let newsImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit

@@ -183,10 +183,22 @@ class StocksViewController: UIViewController {
 
 extension StocksViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataModel.getStocksArray().count
+        if tabBarIndex == 1 && dataModel.getStocksArray().count == 0 {
+            return 1
+        } else {
+            return dataModel.getStocksArray().count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if tabBarIndex == 1 && dataModel.getStocksArray().count == 0 {
+            //We can create a custom EmptyTableViewCell and modify it however we want.
+            let cell = UITableViewCell()
+            cell.backgroundColor = .darkGray
+            cell.textLabel?.textColor = .white
+            cell.textLabel?.text = "No favorite stocks"
+            return cell
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: stockCellReuseIdentifier, for: indexPath as IndexPath) as! StockTableViewCell
         let stockAtIndexPath = dataModel.getStocksArray()[indexPath.row]
         cell.configure(withStock:stockAtIndexPath)
@@ -221,7 +233,11 @@ extension StocksViewController: FavoritesButtonDelegate {
             let shouldHighlightFavoriteButton = dataModel.addToFavorites(stock: stockAtIndexPath)
             cell.favoriteImageClicked(isFavorite: shouldHighlightFavoriteButton)
             if (tabBarIndex == 1) {
-                tableView.deleteRows(at: [indexPath], with: .fade)
+                if dataModel.getStocksArray().count > 0 {
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                } else {
+                    tableView.reloadData()
+                }
             }
         }
     }

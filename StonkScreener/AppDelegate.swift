@@ -41,6 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarController.title = "Stonks"
         tabBarController.tabBar.tintColor = .white
         
+        let myTabBarItem2 = (tabBarController.tabBar.items?[1])! as UITabBarItem
+        myTabBarItem2.image = UIImage(systemName: "heart")?.withRenderingMode(.alwaysOriginal)
+        myTabBarItem2.selectedImage = UIImage(systemName: "heart.fill")?.withRenderingMode(.alwaysOriginal)
+        myTabBarItem2.title = "My stocks"
+        myTabBarItem2.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         

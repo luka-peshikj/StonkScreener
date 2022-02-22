@@ -16,7 +16,6 @@ class NewsDataSource {
         networkManager.getNewsForStock(withSymbol: symbol, completionHandler: { [weak self] result in
             switch result {
             case .success(let newsResponse):
-                print(newsResponse.count)
                 self?.fetchedNews = newsResponse
                 isSuccessfull(true)
                 break

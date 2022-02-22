@@ -14,13 +14,14 @@ enum SortBy: Int {
 }
 
 class StocksDataSource {
-    let networkManager = NetworkManager()
+    private let networkManager = NetworkManager()
     private var fetchedStocks = StockArray()
     private var stocksLoadingError = String()
     private var searchLoadingError = String()
     var filterPredicate = String()
     var tabBarIndex = 0
     var sortByOption = SortBy.none
+    var countriesFilterArray = Array<String>()
     
     func getStocks(isSuccessfull: @escaping (Bool) -> ()) {
         networkManager.getStocks() { [weak self] result in
@@ -77,7 +78,7 @@ class StocksDataSource {
     }
     
     func getStocksForCurrentSettings(stocks: StockArray) -> StockArray {
-        return sortStocks(stocks: filterStocksWithPredicate(stocks: stocks))
+        return filterStocksArrayWithCountries(forArray:sortStocks(stocks: filterStocksWithPredicate(stocks: stocks)))
     }
     
     func getStocksArray() -> StockArray {
@@ -97,6 +98,18 @@ class StocksDataSource {
         } else {
             saveLocalStock(stock: stock)
             return true
+        }
+    }
+    
+    func countriesToFilterWith(countryArray: Array<String>) {
+        countriesFilterArray = countryArray
+    }
+    
+    func filterStocksArrayWithCountries(forArray array: StockArray) -> StockArray {
+        if countriesFilterArray.isEmpty {
+            return array
+        } else {
+            return array.filter( { countriesFilterArray.contains($0.country)} )
         }
     }
 }

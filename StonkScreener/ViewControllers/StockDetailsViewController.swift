@@ -18,7 +18,7 @@ class StockDetailsViewController: UIViewController {
     
     /// Bonus feature!
     /// With the default implementation, we fetch 1000 news object from a single request. That seems like a lot. Here I've implemented a "paginated" way of displaying news objects. There are 100 news objects per page, so naturally we fetch and present them much quicker. Enable this boolean to check this feature out.
-    private var weWantInfiniteScrolling = true
+    private var weWantInfiniteScrolling = false
 
     init(withStock stock: Stock) {
         currentStock = stock

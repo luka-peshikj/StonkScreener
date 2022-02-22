@@ -22,6 +22,8 @@
 		A1EA332127C139D4003D72D3 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA332027C139D4003D72D3 /* LocalStorage.swift */; };
 		A1EA332327C3ADB9003D72D3 /* NewsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA332227C3ADB9003D72D3 /* NewsDataSource.swift */; };
 		A1EA332627C3B91C003D72D3 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = A1EA332527C3B91C003D72D3 /* SDWebImage */; };
+		A1EA332C27C4E165003D72D3 /* CountryFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA332B27C4E165003D72D3 /* CountryFilterTableViewCell.swift */; };
+		A1EA332E27C4E3B7003D72D3 /* CountryFilterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EA332D27C4E3B7003D72D3 /* CountryFilterDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		A1EA331D27C13656003D72D3 /* StockDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDetailsViewController.swift; sourceTree = "<group>"; };
 		A1EA332027C139D4003D72D3 /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		A1EA332227C3ADB9003D72D3 /* NewsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDataSource.swift; sourceTree = "<group>"; };
+		A1EA332B27C4E165003D72D3 /* CountryFilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryFilterTableViewCell.swift; sourceTree = "<group>"; };
+		A1EA332D27C4E3B7003D72D3 /* CountryFilterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryFilterDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +115,7 @@
 			children = (
 				A1EA331427C11332003D72D3 /* StockTableViewCell.swift */,
 				A1EA331927C1206A003D72D3 /* NewsTableViewCell.swift */,
+				A1EA332B27C4E165003D72D3 /* CountryFilterTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -137,6 +142,7 @@
 			children = (
 				A1EA331727C11898003D72D3 /* StocksDataSource.swift */,
 				A1EA332227C3ADB9003D72D3 /* NewsDataSource.swift */,
+				A1EA332D27C4E3B7003D72D3 /* CountryFilterDataSource.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -223,8 +229,10 @@
 				A1EA331327C111A5003D72D3 /* StockNews.swift in Sources */,
 				A1EA331827C11898003D72D3 /* StocksDataSource.swift in Sources */,
 				A1EA330F27C10FCA003D72D3 /* NetworkManager.swift in Sources */,
+				A1EA332C27C4E165003D72D3 /* CountryFilterTableViewCell.swift in Sources */,
 				A1EA330D27C10F87003D72D3 /* Stock.swift in Sources */,
 				A1EA32F827C1092D003D72D3 /* StocksViewController.swift in Sources */,
+				A1EA332E27C4E3B7003D72D3 /* CountryFilterDataSource.swift in Sources */,
 				A1EA32F427C1092D003D72D3 /* AppDelegate.swift in Sources */,
 				A1EA331E27C13656003D72D3 /* StockDetailsViewController.swift in Sources */,
 				A1EA331A27C1206A003D72D3 /* NewsTableViewCell.swift in Sources */,

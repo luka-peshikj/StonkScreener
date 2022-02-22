@@ -9,14 +9,17 @@ import UIKit
 
 class StocksViewController: UIViewController {
     
-    private var tableView: UITableView!
+    private var stocksTableView: UITableView!
+    private var countryFilterTableView: UITableView!
     private let stockCellReuseIdentifier: String = "stockCellReuseIdentifier"
     private var requestInProgress = false
-    private let dataModel = StocksDataSource()
+    private let stocksDataModel = StocksDataSource()
+    private var countriesDataModel = CountryFilterDataSource()
     private var searchBar = UISearchBar()
     private var containerView: UIView!
     private var sortByAlphabeticalButton: UIButton!
     private var sortByMarketCapButton: UIButton!
+    private var filterByCountryButton: UIButton!
     private var alphabeticalSortingActive = false
     private var marketCapSortingActive = false
     private var tabBarIndex = 0
@@ -31,9 +34,9 @@ class StocksViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        dataModel.tabBarIndex = tabBarController?.selectedIndex ?? 0
+        stocksDataModel.tabBarIndex = tabBarController?.selectedIndex ?? 0
         tabBarIndex = tabBarController?.selectedIndex ?? 0
-        tableView.reloadData()
+        stocksTableView.reloadData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -95,35 +98,71 @@ class StocksViewController: UIViewController {
             sortByMarketCapButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10)
         ])
         
+        filterByCountryButton = UIButton()
+        filterByCountryButton.backgroundColor = .darkGray
+        filterByCountryButton.tag = 2
+        filterByCountryButton.translatesAutoresizingMaskIntoConstraints = false
+        filterByCountryButton.setTitle("Filter by country", for: .normal)
+        filterByCountryButton.titleLabel?.font = (UIFont.systemFont(ofSize: 14))
+        filterByCountryButton.addTarget(self, action:#selector(buttonTapped(_ :)), for: .touchUpInside)
+        containerView.addSubview(filterByCountryButton)
+        
+        NSLayoutConstraint.activate([
+            filterByCountryButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 60),
+            filterByCountryButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
+            filterByCountryButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10)
+        ])
+        
     }
     
     private func setupTableView() {
-        tableView = UITableView(frame: .zero)
-        tableView.register(StockTableViewCell.self, forCellReuseIdentifier: stockCellReuseIdentifier)
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.alwaysBounceVertical = false
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.backgroundColor = .darkGray
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(tableView)
+        stocksTableView = UITableView(frame: .zero)
+        stocksTableView.register(StockTableViewCell.self, forCellReuseIdentifier: stockCellReuseIdentifier)
+        stocksTableView.dataSource = self
+        stocksTableView.delegate = self
+        stocksTableView.alwaysBounceVertical = false
+        stocksTableView.rowHeight = UITableView.automaticDimension
+        stocksTableView.backgroundColor = .darkGray
+        stocksTableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(stocksTableView)
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: containerView.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            stocksTableView.topAnchor.constraint(equalTo: containerView.bottomAnchor),
+            stocksTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            stocksTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            stocksTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
+        
+        countryFilterTableView = UITableView(frame: .zero)
+        countryFilterTableView.register(StockTableViewCell.self, forCellReuseIdentifier: stockCellReuseIdentifier)
+        countryFilterTableView.dataSource = self
+        countryFilterTableView.delegate = self
+        countryFilterTableView.alwaysBounceVertical = false
+        countryFilterTableView.rowHeight = UITableView.automaticDimension
+        countryFilterTableView.backgroundColor = .darkGray
+        countryFilterTableView.translatesAutoresizingMaskIntoConstraints = false
+        countryFilterTableView.isHidden = true
+        view.addSubview(countryFilterTableView)
+        
+        NSLayoutConstraint.activate([
+            countryFilterTableView.topAnchor.constraint(equalTo: containerView.bottomAnchor),
+            countryFilterTableView.heightAnchor.constraint(equalToConstant: 300),
+            countryFilterTableView.widthAnchor.constraint(equalToConstant: 100),
+            countryFilterTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
     }
     
     private func configureDataModel() {
         if !requestInProgress {
             requestInProgress = true
-            dataModel.getStocks(isSuccessfull: { [weak self] isSuccessfull in
+            stocksDataModel.getStocks(isSuccessfull: { [weak self] isSuccessfull in
                 self?.requestInProgress = false
                 if isSuccessfull {
                     DispatchQueue.main.async {
-                        self?.tableView.reloadData()
+                        self?.stocksTableView.reloadData()
+                        self?.countriesDataModel.configureDataSource(withStocks: self?.stocksDataModel.getFetchedStocks() ?? [])
+                        self?.countryFilterTableView.reloadData()
                     }
                 } else {
                     //Here we can handle the error response from the server with the "dataModel.stocksLoadingError" property. Depending on what type of error it is, whether or not the dataModel is completely empty or not, we can decide what to show and how to proceed.
@@ -148,12 +187,20 @@ class StocksViewController: UIViewController {
                 marketCapSortingActive = !marketCapSortingActive
                 alphabeticalSortingActive = false
             }
+        case 2:
+            countryFilterTableView.isHidden = !countryFilterTableView.isHidden
+            if countryFilterTableView.isHidden {
+                filterByCountryButton.backgroundColor = .darkGray
+            } else {
+                filterByCountryButton.backgroundColor = .gray
+            }
+
         default:
           break
         }
 
         if alphabeticalSortingActive {
-            dataModel.sortByOption = .alphabetical
+            stocksDataModel.sortByOption = .alphabetical
             UIView.animate(withDuration: 0.1) {
                 self.sortByAlphabeticalButton.backgroundColor = .gray
             }
@@ -164,7 +211,7 @@ class StocksViewController: UIViewController {
         }
         
         if marketCapSortingActive {
-            dataModel.sortByOption = .marketCap
+            stocksDataModel.sortByOption = .marketCap
             UIView.animate(withDuration: 0.1) {
                 self.sortByMarketCapButton.backgroundColor = .gray
             }
@@ -175,68 +222,98 @@ class StocksViewController: UIViewController {
         }
         
         if !alphabeticalSortingActive && !marketCapSortingActive {
-            dataModel.sortByOption = .none
+            stocksDataModel.sortByOption = .none
         }
-        tableView.reloadData()
+        stocksTableView.reloadData()
     }
 }
 
 extension StocksViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tabBarIndex == 1 && dataModel.getStocksArray().count == 0 {
-            return 1
+        if tableView == stocksTableView {
+            if tabBarIndex == 1 && stocksDataModel.getStocksArray().count == 0 {
+                return 1
+            } else {
+                return stocksDataModel.getStocksArray().count
+            }
         } else {
-            return dataModel.getStocksArray().count
+            return countriesDataModel.getCountryArray().count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tabBarIndex == 1 && dataModel.getStocksArray().count == 0 {
-            //We can create a custom EmptyTableViewCell and modify it however we want.
+        if tableView == stocksTableView {
+            if tabBarIndex == 1 && stocksDataModel.getStocksArray().count == 0 {
+                //We can create a custom EmptyTableViewCell and modify it however we want.
+                let cell = UITableViewCell()
+                cell.backgroundColor = .darkGray
+                cell.textLabel?.textColor = .white
+                cell.textLabel?.text = "No favorite stocks"
+                return cell
+            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: stockCellReuseIdentifier, for: indexPath as IndexPath) as! StockTableViewCell
+            let stockAtIndexPath = stocksDataModel.getStocksArray()[indexPath.row]
+            cell.configure(withStock:stockAtIndexPath)
+            cell.delegate = self
+            if (stocksDataModel.getLocallySavedStock().contains(where: { $0.symbol == stockAtIndexPath.symbol })) {
+                cell.setFavoriteImage(isActive: true)
+            }
+            return cell
+        } else {
             let cell = UITableViewCell()
-            cell.backgroundColor = .darkGray
+            let countryFilter = countriesDataModel.getCountryArray()[indexPath.row]
+            if countriesDataModel.getActiveCountrySet().contains(countryFilter) {
+                cell.backgroundColor = .lightGray
+            } else {
+                cell.backgroundColor = .darkGray
+            }
             cell.textLabel?.textColor = .white
-            cell.textLabel?.text = "No favorite stocks"
+            cell.textLabel?.text = countryFilter
             return cell
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: stockCellReuseIdentifier, for: indexPath as IndexPath) as! StockTableViewCell
-        let stockAtIndexPath = dataModel.getStocksArray()[indexPath.row]
-        cell.configure(withStock:stockAtIndexPath)
-        cell.delegate = self
-        if (dataModel.getLocallySavedStock().contains(where: { $0.symbol == stockAtIndexPath.symbol })) {
-            cell.setFavoriteImage(isActive: true)
-        }
-        return cell
     }
 }
 
 extension StocksViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let stockDetailsViewController = StockDetailsViewController(withStock: dataModel.getStocksArray()[indexPath.row])
-        navigationController?.pushViewController(stockDetailsViewController, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        if tableView == stocksTableView {
+            let stockDetailsViewController = StockDetailsViewController(withStock: stocksDataModel.getStocksArray()[indexPath.row])
+            navigationController?.pushViewController(stockDetailsViewController, animated: true)
+        } else {
+            let selectedCountry = countriesDataModel.getCountryArray()[indexPath.row]
+            if countriesDataModel.getActiveCountrySet().contains(selectedCountry) {
+                countryFilterTableView.cellForRow(at: indexPath)?.backgroundColor = .darkGray
+                countriesDataModel.deleteCountryFromFilter(country: selectedCountry)
+            } else {
+                countryFilterTableView.cellForRow(at: indexPath)?.backgroundColor = .lightGray
+                countriesDataModel.addCountryToFilter(country: selectedCountry)
+            }
+            stocksDataModel.countriesFilterArray = Array(countriesDataModel.getActiveCountrySet())
+            stocksTableView.reloadData()
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60;
+        if tableView == stocksTableView {
+            return 60;
+        } else {
+            return 40
+        }
     }
 }
 
 extension StocksViewController: FavoritesButtonDelegate {
     func addToFavorites(cell: StockTableViewCell) {
-        if let indexPath = tableView.indexPath(for: cell) {
-            let stockAtIndexPath = dataModel.getStocksArray()[indexPath.row]
-            let shouldHighlightFavoriteButton = dataModel.addToFavorites(stock: stockAtIndexPath)
+        if let indexPath = stocksTableView.indexPath(for: cell) {
+            let stockAtIndexPath = stocksDataModel.getStocksArray()[indexPath.row]
+            let shouldHighlightFavoriteButton = stocksDataModel.addToFavorites(stock: stockAtIndexPath)
             cell.favoriteImageClicked(isFavorite: shouldHighlightFavoriteButton)
             if (tabBarIndex == 1) {
-                if dataModel.getStocksArray().count > 0 {
-                    tableView.deleteRows(at: [indexPath], with: .fade)
+                if stocksDataModel.getStocksArray().count > 0 {
+                    stocksTableView.deleteRows(at: [indexPath], with: .fade)
                 } else {
-                    tableView.reloadData()
+                    stocksTableView.reloadData()
                 }
             }
         }
@@ -251,14 +328,14 @@ extension StocksViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         if let stockPredicateString = searchBar.text?.addingPercentEncoding(withAllowedCharacters: .alphanumerics) {
-            dataModel.filterPredicate = stockPredicateString
-            tableView.reloadData()
+            stocksDataModel.filterPredicate = stockPredicateString
+            stocksTableView.reloadData()
         }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         //This is an expensive opperation, we can decide if we want to update the tableView on every text change or only when the user presses the Search button.
-        dataModel.filterPredicate = searchText
-        tableView.reloadData()
+        stocksDataModel.filterPredicate = searchText
+        stocksTableView.reloadData()
     }
 }

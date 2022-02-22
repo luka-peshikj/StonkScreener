@@ -1,19 +1,19 @@
 //
-//  StockTableViewCell.swift
+//  CountryFilterTableViewCell.swift
 //  StonkScreener
 //
-//  Created by Luka on 19.2.22.
+//  Created by Luka on 22.2.22.
 //
 
 import UIKit
 
-protocol FavoritesButtonDelegate {
-    func addToFavorites(cell: StockTableViewCell)
+protocol CountryFilterDelegate {
+    func addToFilter(country: String)
 }
 
-class StockTableViewCell: UITableViewCell {
+class CountryFilterTableViewCell: UITableViewCell {
 
-    var delegate: FavoritesButtonDelegate?
+    var delegate: CountryFilterDelegate?
 
     private let stockSymbolLabel: UILabel = {
         let lbl = UILabel()
@@ -98,7 +98,7 @@ class StockTableViewCell: UITableViewCell {
     }
 
     @objc func addToFavoritesButtonTapped() {
-        delegate?.addToFavorites(cell: self)
+        delegate?.addToFilter(country: "US")
     }
 
     func configure(withStock stock: Stock) {

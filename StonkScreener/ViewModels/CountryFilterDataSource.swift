@@ -5,9 +5,6 @@
 //  Created by Luka on 22.2.22.
 //
 
-import Foundation
-
-
 class CountryFilterDataSource {
     
     private var stocksArray = StockArray()

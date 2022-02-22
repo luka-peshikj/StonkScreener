@@ -5,8 +5,6 @@
 //  Created by Luka on 19.2.22.
 //
 
-import Foundation
-
 enum SortBy: Int {
     case none
     case alphabetical

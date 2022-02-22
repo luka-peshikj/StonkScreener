@@ -5,8 +5,6 @@
 //  Created by Luka on 19.2.22.
 //
 
-import Foundation
-
 struct Stock: Codable {
     let symbol, companyName: String
     let marketCap: Int

@@ -5,8 +5,6 @@
 //  Created by Luka on 21.2.22.
 //
 
-import Foundation
-
 class NewsDataSource {
     
     private let networkManager = NetworkManager()

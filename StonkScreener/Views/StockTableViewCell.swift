@@ -104,7 +104,7 @@ class StockTableViewCell: UITableViewCell {
     func configure(withStock stock: Stock) {
         stockSymbolLabel.text = stock.symbol
         stockCompanyNameLabel.text = stock.companyName
-        stockPriceLabel.text = stock.price.description
+        stockPriceLabel.text = String(format: "$%.2f", stock.price)
     }
     
     override func prepareForReuse() {

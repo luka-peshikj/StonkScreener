@@ -5,8 +5,6 @@
 //  Created by Luka on 19.2.22.
 //
 
-import Foundation
-
 struct StockNews: Codable {
     let symbol, publishedDate, title: String
     let image: String?
